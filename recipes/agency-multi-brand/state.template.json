@@ -1,0 +1,32 @@
+{
+  "_comment": "TEMPLATE, do not edit by hand. Run BOOTSTRAP-PROMPT.md with your agent + the ApparelHub connector; it calls list_my_workspaces, lets you choose which workspaces are in-scope clients, and writes a real state.json next to this file with the real client list. The single 'clients' entry below is a schema illustration only. Then run KICKOFF-PROMPT.md.",
+  "_bootstrap": "unconfigured",
+  "account": {
+    "name": null
+  },
+  "clients": [
+    {
+      "workspace_uuid": null,
+      "name": null,
+      "sub_pass": "serve_assess_optimize"
+    }
+  ],
+  "gates": {
+    "mode": "gate_money_and_go_live",
+    "autonomous_spend_cap_usd": 0,
+    "publish_live": "requires_approval",
+    "confirm_paid_order_to_production": "requires_approval",
+    "apply_discretionary_reprice": "requires_approval"
+  },
+  "defaults": {
+    "margin_floor_pct": 40,
+    "no_sales_days": 30
+  },
+  "phase": "agency_ops",
+  "cursors": {
+    "last_run_at": null,
+    "last_run_id": 0,
+    "last_client_index": 0,
+    "clients_processed": 0
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "_comment": "TEMPLATE, do not edit by hand. Run BOOTSTRAP-PROMPT.md with your agent + the ApparelHub connector; it discovers your account's anchors and writes a real state.json next to this file. Then run KICKOFF-PROMPT.md.",
+  "_bootstrap": "unconfigured",
+  "brand": {
+    "workspace_uuid": null,
+    "name": null
+  },
+  "spine": {
+    "primary_store_uuid": null,
+    "primary_channel": { "type": null, "integration_uuid": null, "shop": null },
+    "providers": {}
+  },
+  "gates": {
+    "mode": "gate_money_and_go_live",
+    "autonomous_spend_cap_usd": 0,
+    "publish_live": "requires_approval",
+    "confirm_paid_order_to_production": "requires_approval"
+  },
+  "thresholds": {
+    "no_sales_days": 30,
+    "lookback_days": 90,
+    "margin_floor_pct": 40,
+    "apply_archive_autonomously": true,
+    "apply_below_floor_margin_fix": true,
+    "apply_discretionary_reprice": "requires_approval"
+  },
+  "phase": "optimize",
+  "cursors": {
+    "last_run_at": null,
+    "last_run_id": 0,
+    "listings_reviewed": 0,
+    "archived": 0,
+    "margin_fixed": 0,
+    "reprices_queued": 0
+  }
+}

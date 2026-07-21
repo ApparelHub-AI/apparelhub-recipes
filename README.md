@@ -29,10 +29,10 @@ account on first run.
 | Recipe | Status | What it does |
 |---|---|---|
 | [`autonomous-storefront`](recipes/autonomous-storefront/) | Available | Runs a whole store end to end, hands-off, with money + go-live gates you control. |
-| `seasonal-collection-builder` | Planned | Spins up a themed collection on a deadline, then retires it. |
-| `reconciler-restocker` | Planned | Keeps a target catalog present; rebuilds anything missing. |
-| `review-and-optimize` | Planned | Reads analytics and prunes / reprices underperformers. |
-| `agency-multi-brand` | Planned | Runs one workspace per client across an agency account. |
+| [`reconciler-restocker`](recipes/reconciler-restocker/) | Available | Keeps a desired-state target catalog present; rebuilds anything missing as a draft. |
+| [`seasonal-collection-builder`](recipes/seasonal-collection-builder/) | Available | Builds a time-boxed themed collection, then retires it on a deadline. |
+| [`review-and-optimize`](recipes/review-and-optimize/) | Available | Reads analytics and applies safe optimizations (archive dead listings, fix sub-floor margins); queues the rest. |
+| [`agency-multi-brand`](recipes/agency-multi-brand/) | Available | Runs a safe pass across every client workspace in an agency account, one at a time. |
 
 ## Safety by default
 Every recipe ships with guardrails on: hard gates before any real spend or going live, a margin

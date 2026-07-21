@@ -1,0 +1,42 @@
+{
+  "_comment": "TEMPLATE, do not edit by hand. Run BOOTSTRAP-PROMPT.md with your agent + the ApparelHub connector; it discovers your account's anchors and writes a real state.json next to this file. Then fill collection-brief.md and run KICKOFF-PROMPT.md.",
+  "_bootstrap": "unconfigured",
+  "brand": {
+    "workspace_uuid": null,
+    "name": null
+  },
+  "spine": {
+    "primary_store_uuid": null,
+    "primary_channel": { "type": null, "integration_uuid": null, "shop": null },
+    "backup_channel": { "type": null, "integration_uuid": null, "shop": null },
+    "secondary_stores": {},
+    "providers": {}
+  },
+  "gates": {
+    "mode": "gate_money_and_go_live",
+    "autonomous_spend_cap_usd": 0,
+    "margin_floor_pct": 40,
+    "_margin_floor_note": "Confirm/adjust before going live.",
+    "max_products_per_run": 2,
+    "publish_live": "requires_approval",
+    "confirm_paid_order_to_production": "requires_approval",
+    "never_delete": true
+  },
+  "collection": {
+    "theme": null,
+    "deadline": null,
+    "_deadline_note": "ISO date (YYYY-MM-DD) the operator sets; after it, live collections move to retiring.",
+    "target_count": null,
+    "collection_uuid": null,
+    "status": "setup"
+  },
+  "phase": "seasonal",
+  "cursors": {
+    "last_run_at": null,
+    "last_run_id": 0,
+    "products_built": 0,
+    "products_live": 0,
+    "products_retired": 0
+  },
+  "catalog": []
+}
