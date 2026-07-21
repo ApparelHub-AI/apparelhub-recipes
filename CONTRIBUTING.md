@@ -4,12 +4,12 @@ A recipe is an operating blueprint an AI agent runs against a user's own Apparel
 Keep recipes safe, generic, and self-configuring.
 
 ## What every recipe must include
-- `README.md` — what it does, prerequisites, install (copy, bootstrap, kickoff), safety model.
+- `README.md`: what it does, prerequisites, install (copy, bootstrap, kickoff), safety model.
 - A charter (`constitution.md` or similar) the agent reads at the start of every run.
-- `state.template.json` — the state schema with anchors left null.
-- `BOOTSTRAP-PROMPT.md` — a read-only discovery step that resolves the user's own anchors (via
+- `state.template.json`: the state schema with anchors left null.
+- `BOOTSTRAP-PROMPT.md`: a read-only discovery step that resolves the user's own anchors (via
   `list_my_workspaces` / `list_my_stores` / `list_catalog_providers`) and writes their `state.json`.
-- `KICKOFF-PROMPT.md` — how to start it.
+- `KICKOFF-PROMPT.md`: how to start it.
 - Any memory files the charter references (journal, approvals queue, etc.), shipped as generic
   templates.
 

@@ -1,7 +1,7 @@
 # Recipe: Autonomous Storefront
 
 Run a custom-merch store end to end from your own AI agent. Your agent designs, builds products,
-drafts listings, monitors orders, reconciles fulfillment, and optimizes — pausing only at the two
+drafts listings, monitors orders, reconciles fulfillment, and optimizes, pausing only at the two
 money / go-live gates you control.
 
 Works in any agent runtime that can reach the ApparelHub connector: Claude Cowork, Claude Code,
@@ -24,7 +24,7 @@ or a custom harness.
    `niche-brief.md`, and stops for your approval.
 
 ## How it runs
-The full operating model is in **`constitution.md`** — the charter your agent reads at the start
+The full operating model is in **`constitution.md`**: the charter your agent reads at the start
 of every run. In short, each run: Orient, Serve existing orders, Assess, Optimize, Create up to
 N DRAFT products, queue gated decisions, Log.
 
@@ -49,7 +49,7 @@ N DRAFT products, queue gated decisions, Log.
 | `pending-approvals.md` | The gate queue for your sign-off. |
 
 ## Phases
-1. **Draft catalog (default):** validate niche, ship ~6–10 DRAFT products. Prove the loop.
+1. **Draft catalog (default):** validate niche, ship ~6 to 10 DRAFT products. Prove the loop.
 2. **Go live:** you approve the first batch; real selling begins (paid-order confirmation stays gated).
 3. **Steady state:** self-optimizing loop; you review the journal + queue on your rhythm.
 

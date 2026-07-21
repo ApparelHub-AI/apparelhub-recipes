@@ -5,13 +5,13 @@ these items itself.** The operator reviews, then either performs the action or t
 it is approved.
 
 Two gate types:
-- **PUBLISH-LIVE** — promote a DRAFT listing to live on a sales channel.
-- **CONFIRM-ORDER** — confirm a paid order to production (real fulfillment spend).
+- **PUBLISH-LIVE**: promote a DRAFT listing to live on a sales channel.
+- **CONFIRM-ORDER**: confirm a paid order to production (real fulfillment spend).
 
 Format per item:
 
 ```
-### [GATE-TYPE] <short title> — <date>
+### [GATE-TYPE] <short title>: <date>
 - What: ...
 - Why / evidence: ...
 - Cost / risk: ...

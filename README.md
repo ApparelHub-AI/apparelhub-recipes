@@ -2,7 +2,7 @@
 
 Open-source, runnable blueprints for operating a custom-merchandise business with **your own AI
 agent** on [ApparelHub](https://apparelhub.ai). Clone a recipe, point your agent at it, and run
-the pipeline — design, product creation, listing, orders, and fulfillment — from Claude Cowork,
+the pipeline (design, product creation, listing, orders, and fulfillment) from Claude Cowork,
 Claude Code, or any custom harness.
 
 A **recipe** is a self-contained operating pattern: a charter your agent follows, a memory model
@@ -13,7 +13,7 @@ account on first run.
 ## The agent surface, three ways
 | Repo | What it is |
 |---|---|
-| **apparelhub-skills** | The playbook your agent loads on demand — how to call the API correctly. |
+| **apparelhub-skills** | The playbook your agent loads on demand: how to call the API correctly. |
 | **apparelhub-mcp** | The MCP tool server that exposes the pipeline to your agent. |
 | **apparelhub-recipes** (this repo) | End-to-end operating blueprints you drop into your agent's runtime. |
 
@@ -21,7 +21,7 @@ account on first run.
 1. Pick a recipe under [`recipes/`](recipes/) and copy its folder into your agent's working /
    mounted folder.
 2. Give your agent access to ApparelHub (the hosted MCP connector, the local MCP server, or an
-   Agent API key — see [apparelhub.ai/agents](https://apparelhub.ai/agents)).
+   Agent API key, see [apparelhub.ai/agents](https://apparelhub.ai/agents)).
 3. Run the recipe's `BOOTSTRAP-PROMPT.md` (self-configures against your account), then its
    `KICKOFF-PROMPT.md`.
 

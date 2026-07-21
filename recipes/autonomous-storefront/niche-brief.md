@@ -1,6 +1,6 @@
 # Niche Brief
 
-**STATUS: PENDING** — the agent produces this in Phase 1, Step 1 (niche validation), then the
+**STATUS: PENDING**: the agent produces this in Phase 1, Step 1 (niche validation), then the
 operator approves it. Until it is filled in and approved, the agent does not create any products.
 
 Replace this entire template with a validated brief covering the sections below.
@@ -17,7 +17,7 @@ _Who they are, where they gather, and what they will pay._
 ## Positioning
 _The brand's one-line promise. Benefit-led, honest, no invented claims._
 
-## Launch concepts (3–5)
+## Launch concepts (3 to 5)
 
 | # | Design concept | Garment (provider + product_ref) | Why it fits the buyer | Target price / est. margin |
 |---|---|---|---|---|

@@ -1,5 +1,5 @@
 {
-  "_comment": "TEMPLATE — do not edit by hand. Run BOOTSTRAP-PROMPT.md with your agent + the ApparelHub connector; it discovers your account's anchors and writes a real state.json next to this file. Then run KICKOFF-PROMPT.md.",
+  "_comment": "TEMPLATE, do not edit by hand. Run BOOTSTRAP-PROMPT.md with your agent + the ApparelHub connector; it discovers your account's anchors and writes a real state.json next to this file. Then run KICKOFF-PROMPT.md.",
   "_bootstrap": "unconfigured",
   "brand": {
     "workspace_uuid": null,

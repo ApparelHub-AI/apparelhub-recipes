@@ -1,4 +1,4 @@
-# Bootstrap prompt — run this ONCE, first
+# Bootstrap prompt: run this ONCE, first
 
 > Prereq: your agent can reach the ApparelHub connector, and this recipe folder is its
 > working / mounted folder. Paste the block below into your agent.
@@ -26,4 +26,4 @@ orders.
    `catalog` exactly as the template has them.
 6. Show me a short summary of the resolved anchors and confirm `state.json` was written. Stop.
 
-Do NOT proceed to niche validation or any build — that is a separate step (`KICKOFF-PROMPT.md`).
+Do NOT proceed to niche validation or any build, that is a separate step (`KICKOFF-PROMPT.md`).
