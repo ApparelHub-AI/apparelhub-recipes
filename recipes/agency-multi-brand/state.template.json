@@ -8,7 +8,8 @@
     {
       "workspace_uuid": null,
       "name": null,
-      "sub_pass": "serve_assess_optimize"
+      "_per_client_routine_comment": "Fixed, written by the bootstrap, not a user choice. Every client gets the same routine on every run: serve existing orders, then assess performance, then apply only safe optimizations. Defined in constitution.md section 2.",
+      "per_client_routine": "serve_then_assess_then_safe_optimize"
     }
   ],
   "gates": {
