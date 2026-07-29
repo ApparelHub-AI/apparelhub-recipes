@@ -31,7 +31,7 @@ harness.
 The full operating model is in **`constitution.md`**: the charter your agent reads at the start of
 every run. In short, each run: read the cross-client portfolio, then for **each** configured
 client workspace (round-robin for fairness), pin that client's workspace on every call and run a
-Serve, Assess, Safe-optimize sub-pass, queue anything customer-affecting per client, and log a
+Serve, Assess, Safe-optimize routine, queue anything customer-affecting per client, and log a
 per-client line.
 
 ## Isolation model

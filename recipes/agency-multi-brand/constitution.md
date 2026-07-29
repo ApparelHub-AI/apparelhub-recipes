@@ -62,7 +62,7 @@ in this file.**
    `analytics_portfolio` for the cross-client KPI snapshot.
 2. **Per client**: iterate `state.clients`, resuming from `cursors.last_client_index` (round-robin
    for fairness). For **each** client workspace, pin `workspace=<that client's workspace_uuid>` on
-   every call, and do this sub-pass in order:
+   every call, and run this three-step routine in order:
    - **a. Serve.** `reconcile_order` any paid orders; check holds
      (`list_order_holds` → `approve_order_hold` **only if it needs no spend**, else queue);
      triage `list_fulfillment_issues` (resolve informational ones, queue anything that spends).
@@ -126,8 +126,8 @@ why, cost, and the exact tool call you would run on approval) and move on. **Do 
 - **Idempotent.** Re-running must not duplicate work. `reconcile_order` and `resolve_fulfillment_issue`
   are safe to re-run; archive is a no-op on an already-archived listing.
 - **Finish a client before you start the next.** Complete a client's Serve + Assess + Safe-optimize
-  sub-pass before opening the next client.
-- **Blocked or unavailable = count-as-done.** A client whose workspace is missing, or whose sub-pass
+  routine before opening the next client.
+- **Blocked or unavailable = count-as-done.** A client whose workspace is missing, or whose routine
   hits a provider error, → log it, mark it `unavailable` / `blocked` in the run journal, count it
   done **for this run**, move on. One client never stalls the run.
 - **Fairness cursor.** `cursors.last_client_index` advances round-robin so no client is starved
