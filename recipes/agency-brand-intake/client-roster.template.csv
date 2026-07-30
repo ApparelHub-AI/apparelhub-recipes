@@ -1,0 +1,2 @@
+client_name,assets_folder,approver_email,notes,status,workspace_uuid,last_run
+Acme Co,/path/to/clients/acme-co,brand@acme.example,Example row. Delete it and add your own clients. Fill only the first four columns; the agent writes the last three.,,,

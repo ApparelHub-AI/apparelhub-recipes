@@ -33,6 +33,7 @@ account on first run.
 | [`seasonal-collection-builder`](recipes/seasonal-collection-builder/) | Available | Builds a time-boxed themed collection, then retires it on a deadline. |
 | [`review-and-optimize`](recipes/review-and-optimize/) | Available | Reads analytics and applies safe optimizations (archive dead listings, fix sub-floor margins); queues the rest. |
 | [`agency-multi-brand`](recipes/agency-multi-brand/) | Available | Runs a safe pass across every client workspace in an agency account, one at a time. |
+| [`agency-brand-intake`](recipes/agency-brand-intake/) | Available | Onboards client brands from a roster spreadsheet, builds their brand identity and creative, and closes each deliverable with an email approval. |
 
 ## Safety by default
 Every recipe ships with guardrails on: hard gates before any real spend or going live, a margin
