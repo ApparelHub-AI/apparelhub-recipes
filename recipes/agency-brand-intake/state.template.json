@@ -1,0 +1,72 @@
+{
+  "_comment": "TEMPLATE, do not edit by hand. Run BOOTSTRAP-PROMPT.md with your agent + the ApparelHub connector; it checks your agency entitlement, creates client-roster.csv, resolves how this runtime sends email, and writes a real state.json next to this file. The single 'clients' entry below is a schema illustration only, the bootstrap replaces it with an empty list. Then fill in the roster and run KICKOFF-PROMPT.md.",
+  "_bootstrap": "unconfigured",
+  "account": {
+    "name": null,
+    "_agency_feature_comment": "Set by the bootstrap. This recipe needs it: create_workspace returns feature_unavailable without it.",
+    "agency_feature": null
+  },
+  "roster": {
+    "path": "client-roster.csv",
+    "_format_comment": "csv (default, readable and writable everywhere) | xlsx (needs openpyxl or pandas in the runtime) | gsheet (readable via the Drive connector, but status columns cannot be written back)",
+    "format": "csv",
+    "operator_columns": ["client_name", "assets_folder", "approver_email", "notes"],
+    "agent_columns": ["status", "workspace_uuid", "last_run"]
+  },
+  "approvals": {
+    "channel": "email",
+    "_default_approver_comment": "Used for any roster row that leaves approver_email blank.",
+    "default_approver_email": null,
+    "_outbound_comment": "Resolved by the bootstrap. send_tool = this runtime can send email itself, whether via a connector tool or a local module / CLI / SMTP credential invoked through the shell. gmail_draft = it can only create a draft, so the operator clicks send and the agent says so in its run summary.",
+    "outbound": null,
+    "_send_tool_comment": "The exact tool name, command, or import the bootstrap verified for sending. Null when outbound is gmail_draft.",
+    "send_tool": null,
+    "reminder_after_days": 3,
+    "expire_after_days": 14
+  },
+  "clients": [
+    {
+      "client_name": null,
+      "assets_folder": null,
+      "approver_email": null,
+      "workspace_uuid": null,
+      "_stage_comment": "discovered | workspace_ready | identity_pending | identity_ready | concepts_built | creative_sent | creative_approved | products_drafted | golive_sent | delivered | blocked | retired. See constitution.md section 3.",
+      "stage": "discovered",
+      "_identity_source_comment": "existing_assets = inferred from what was already in the folder. generated_interactive = established with the operator or via an intake questionnaire.",
+      "identity_source": null,
+      "concepts": [],
+      "products": [],
+      "approval": {
+        "creative_thread_id": null,
+        "golive_thread_id": null,
+        "questionnaire_thread_id": null
+      },
+      "revision_round": 0,
+      "blocked_reason": null,
+      "last_run": null
+    }
+  ],
+  "gates": {
+    "mode": "gate_delivery_and_go_live",
+    "autonomous_spend_cap_usd": 0,
+    "ship_without_approval_reply": "forbidden",
+    "publish_live": "requires_approval",
+    "confirm_paid_order_to_production": "requires_approval",
+    "delete_anything": "forbidden"
+  },
+  "defaults": {
+    "max_new_clients_per_run": 3,
+    "max_concepts_per_client": 4,
+    "max_products_per_client": 4,
+    "max_revision_rounds": 3,
+    "margin_floor_pct": 40
+  },
+  "phase": "intake",
+  "cursors": {
+    "last_run_at": null,
+    "last_run_id": 0,
+    "last_client_index": 0,
+    "clients_onboarded": 0,
+    "clients_delivered": 0
+  }
+}
