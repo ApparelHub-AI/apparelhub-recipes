@@ -1,7 +1,21 @@
 name: forbidden-patterns
+
+# This is a PUBLIC repo. Guard against committing account-specific or internal data
+# (ApparelHub Rule 13): real names / account references, real store hostnames, full
+# account UUIDs, or internal repo / ticket / path references.
+#
+# The term lists are NOT in this (public) file. They live in the FORBIDDEN_TERMS and
+# FORBIDDEN_REFS repo secrets, so the terms themselves are never exposed here. In CI the
+# scans are quiet: a failure names the category and the offending files, never the matched
+# value, so a public build log can never echo the very string the guard keeps out.
+#
+# SECURITY: keep this on `pull_request` (never `pull_request_target`) and never add
+# `id-token: write` or cloud credentials. Fork PRs execute untrusted code here.
+
 on:
   push:
   pull_request:
+
 jobs:
   scan:
     runs-on: ubuntu-latest
@@ -9,7 +23,40 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Scan for account-specific data
+
+      - name: Scan tracked files for account-specific / internal data
         env:
           FORBIDDEN_TERMS: ${{ secrets.FORBIDDEN_TERMS }}
+          FORBIDDEN_REFS: ${{ secrets.FORBIDDEN_REFS }}
         run: bash scripts/check_forbidden_patterns.sh
+
+      - name: Scan commit messages + PR text for private references
+        if: github.event_name == 'pull_request'
+        env:
+          FORBIDDEN_REFS: ${{ secrets.FORBIDDEN_REFS }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -uo pipefail
+          # Commit messages, PR titles, and PR bodies are PUBLIC surfaces too, and a file-only
+          # scan misses them. PR text is read via env (never shell interpolation) so a hostile
+          # title cannot inject. Quiet greps: a match is never echoed back into the log.
+          fail=0
+          PAT="${FORBIDDEN_REFS:-}"
+          if [ -z "$PAT" ]; then
+            echo "::warning::FORBIDDEN_REFS unavailable in this context (e.g. a fork PR); skipped the commit / PR text scan."
+            exit 0
+          fi
+          MSGS=$(git log --format='%s%n%b' "$BASE_SHA".."$HEAD_SHA" 2>/dev/null || true)
+          if printf '%s' "$MSGS" | grep -qE "$PAT"; then
+            echo "::error::A private-repo reference appears in a COMMIT MESSAGE in this PR. Commit messages are public: reword them (rebase) before merging."
+            fail=1
+          fi
+          if printf '%s\n%s' "${PR_TITLE:-}" "${PR_BODY:-}" | grep -qE "$PAT"; then
+            echo "::error::A private-repo reference appears in the PR title or body. Edit the PR text; it is a public surface."
+            fail=1
+          fi
+          if [ "$fail" -ne 0 ]; then exit 1; fi
+          echo "Commit messages + PR text: clean."
