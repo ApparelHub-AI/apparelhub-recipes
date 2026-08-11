@@ -58,10 +58,28 @@ primary store unless a finding clearly points at another store you own.
    no-sales listings older than `state.thresholds.no_sales_days`, and below-floor-margin
    listings. Use `list_my_products` + `estimate_order_costs` / `get_order_details` to confirm
    current price and margin before flagging.
+   - **Then read DEMAND, not just sales.** `channel_opportunities` (or
+     `channel_performance`) shows what the sales channel reports about each listing:
+     how many people saw it, how many clicked, how many bought. Orders alone cannot
+     distinguish a listing nobody saw from one everybody saw and nobody bought, and
+     those two need opposite actions. Start with `channel_coverage` — if no connected
+     channel reports performance, say so in the journal and treat every no-sales call
+     as unproven rather than acting on it.
 4. **Optimize (safe only)**:
    - `auto_optimize_listings(dry_run=true)` first. Log exactly what it would do. Then apply
      **only its archive-type actions** (archive-only is autonomous, see §4). Never let it set
      anything live.
+   - **Act on the state, not on "no sales".** A listing with proven demand and no sales is
+     the most valuable thing in the catalogue, not a candidate for archiving:
+     - `conversion_blocked` / `pdp_blocked` → **queue a listing fix**, never archive. On
+       TikTok, `diagnose_tiktok_listings` will tell you exactly what the channel objects to.
+     - `starved` → a discovery problem. Note it in the journal; do not rewrite the listing
+       and do not archive it.
+     - `dead` → the only state where archiving is right.
+     - `insufficient_data` / no demand data → do nothing this cycle.
+   - **Measure last cycle's fixes.** For any listing this recipe queued a fix for
+     previously, re-read its state and record whether it moved. That is the only way to
+     know whether the change helped.
    - Fix any **below-floor or negative margin** on an existing listing by raising price up to the
      margin floor with `set_prices_by_margin` (autonomous, see §4).
    - **Queue** every **discretionary** reprice (any raise or lower for performance, and any bulk
@@ -87,6 +105,11 @@ and the exact tool call you would run on approval) and move on. **Do not execute
 ## 4. Guardrails: always enforce
 
 - **$0 autonomous spend.** Anything that spends money → the approval queue.
+- **Never archive a listing you cannot see demand for.** Archiving on "no sales" alone removes
+  listings that people are actively viewing and failing to buy — proven demand with a fixable
+  listing. `auto_optimize_listings` only proposes an archive when the channel confirms the
+  listing is genuinely inert; where there is no demand data it proposes `review` and applies
+  nothing. Do not override that by archiving by hand on a sales figure alone.
 - **Archive-only, never delete.** `auto_optimize_listings` only ever ARCHIVES (it never deletes
   and never sets anything live), so applying its archive suggestions autonomously is allowed.
   Always run it `dry_run=true` first, log what it would do, then apply archive-only via
