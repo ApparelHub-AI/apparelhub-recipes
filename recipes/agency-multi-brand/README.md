@@ -11,21 +11,21 @@ For agencies and Enterprise accounts that manage several brands as separate work
 any agent runtime that can reach the ApparelHub connector: Claude Cowork, Claude Code, or a custom
 harness.
 
+## Start it with one line
+
+Paste this into a fresh chat with your agent:
+
+> Read https://raw.githubusercontent.com/ApparelHub-AI/apparelhub-recipes/main/recipes/agency-multi-brand/START.md and follow it.
+
+If your agent cannot fetch URLs, open
+[`START.md`](https://raw.githubusercontent.com/ApparelHub-AI/apparelhub-recipes/main/recipes/agency-multi-brand/START.md)
+and paste the whole thing instead. It carries every gate the agent needs, and it needs no clone.
+
 ## What you need
 - An ApparelHub agency / Enterprise account with **multiple workspaces**, one per client brand,
   each with its own stores, providers, and sales channels.
 - Agent access to ApparelHub: the hosted MCP connector, the local MCP server, or an Agent API
   key. See [apparelhub.ai/agents](https://apparelhub.ai/agents).
-
-## Install
-1. Copy this `agency-multi-brand/` folder into your agent's working / mounted folder.
-   (Copy it out of this repo so your filled-in state stays yours.)
-2. Grant your agent **only** the ApparelHub connector (add Gmail if you want run-summary emails).
-3. Run **`BOOTSTRAP-PROMPT.md`** once. Your agent lists your workspaces, you choose which ones are
-   in-scope clients, and it writes your own `state.json` with the real client list. Read-only
-   discovery plus one file write; nothing is built.
-4. Run **`KICKOFF-PROMPT.md`**. It runs one agency pass across your configured clients and stops at
-   the gates.
 
 ## How it runs
 The full operating model is in **`constitution.md`**: the charter your agent reads at the start of
@@ -50,9 +50,23 @@ workspace that is not in your configured client list, even if the account has ot
 - **Self-configuring:** no account data is hardcoded; your client list lives only in your local
   `state.json`.
 
+## Running it from a clone (advanced)
+
+The one-line URL above is the supported path. If you would rather keep the files locally:
+
+1. Copy this `agency-multi-brand/` folder into your agent's working / mounted folder.
+   (Copy it out of this repo so your filled-in state stays yours.)
+2. Grant your agent **only** the ApparelHub connector (add Gmail if you want run-summary emails).
+3. Run **`BOOTSTRAP-PROMPT.md`** once. Your agent lists your workspaces, you choose which ones are
+   in-scope clients, and it writes your own `state.json` with the real client list. Read-only
+   discovery plus one file write; nothing is built.
+4. Run **`KICKOFF-PROMPT.md`**. It runs one agency pass across your configured clients and stops at
+   the gates.
+
 ## Files
 | File | Role |
 |---|---|
+| `START.md` | The one-line URL entry point. Self-contained; carries the gates in one pasteable file. |
 | `constitution.md` | The charter. Read every run. |
 | `state.template.json` | Template; the bootstrap writes your real `state.json` (with your client list) from it. |
 | `BOOTSTRAP-PROMPT.md` | Step 0: choose your in-scope client workspaces and self-configure. |

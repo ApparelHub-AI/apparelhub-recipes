@@ -7,23 +7,28 @@ the collection on a deadline, pausing only at the two money / go-live gates you 
 Works in any agent runtime that can reach the ApparelHub connector: Claude Cowork, Claude Code,
 or a custom harness.
 
+## Start it with one line
+
+Paste this into a fresh chat with your agent:
+
+> Read https://raw.githubusercontent.com/ApparelHub-AI/apparelhub-recipes/main/recipes/seasonal-collection-builder/START.md and follow it.
+
+If your agent cannot fetch URLs, open
+[`START.md`](https://raw.githubusercontent.com/ApparelHub-AI/apparelhub-recipes/main/recipes/seasonal-collection-builder/START.md)
+and paste the whole thing instead. It carries everything the agent needs to start safely, and it
+needs no clone.
+
+Once it has written your `state.json`, fill **`collection-brief.md`** (theme, deadline, target
+count) and set its `STATUS` to `READY`, then run
+[`KICKOFF-PROMPT.md`](https://raw.githubusercontent.com/ApparelHub-AI/apparelhub-recipes/main/recipes/seasonal-collection-builder/KICKOFF-PROMPT.md).
+Your agent creates the collection, builds on-theme DRAFT products up to your target, groups them,
+and stops for your go-live approval.
+
 ## What you need
 - An ApparelHub account with at least one fulfillment provider connected (Printful / Printify /
   Gelato) and a sales channel (Shopify / WooCommerce / Wix) on the store you want to run.
 - Agent access to ApparelHub: the hosted MCP connector, the local MCP server, or an Agent API
   key. See [apparelhub.ai/agents](https://apparelhub.ai/agents).
-
-## Install
-1. Copy this `seasonal-collection-builder/` folder into your agent's working / mounted folder.
-   (Copy it out of this repo so your filled-in state stays yours.)
-2. Grant your agent **only** the ApparelHub connector (add Gmail if you want run-summary emails).
-3. Run **`BOOTSTRAP-PROMPT.md`** once. Your agent discovers your account's anchors (workspace,
-   store, channels, providers) and writes your own `state.json`. Read-only discovery plus one
-   file write; nothing is built.
-4. Fill **`collection-brief.md`**: the theme, the deadline, and how many products you want. Set
-   `STATUS: READY` at the top when it is done.
-5. Run **`KICKOFF-PROMPT.md`**. Your agent creates the collection, builds on-theme DRAFT products
-   up to your target, groups them, and stops for your go-live approval.
 
 ## How it runs
 The full operating model is in **`constitution.md`**: the charter your agent reads at the start
@@ -53,9 +58,25 @@ Assess, queue gated decisions, Log. The collection moves through
 - **Self-configuring:** no account data is hardcoded; your anchors live only in your local
   `state.json`.
 
+## Running it from a clone (advanced)
+
+The one-line URL above is the supported path. If you would rather keep the files locally:
+
+1. Copy this `seasonal-collection-builder/` folder into your agent's working / mounted folder.
+   (Copy it out of this repo so your filled-in state stays yours.)
+2. Grant your agent **only** the ApparelHub connector (add Gmail if you want run-summary emails).
+3. Run **`BOOTSTRAP-PROMPT.md`** once. Your agent discovers your account's anchors (workspace,
+   store, channels, providers) and writes your own `state.json`. Read-only discovery plus one
+   file write; nothing is built.
+4. Fill **`collection-brief.md`**: the theme, the deadline, and how many products you want. Set
+   `STATUS: READY` at the top when it is done.
+5. Run **`KICKOFF-PROMPT.md`**. Your agent creates the collection, builds on-theme DRAFT products
+   up to your target, groups them, and stops for your go-live approval.
+
 ## Files
 | File | Role |
 |---|---|
+| `START.md` | The one-line URL entry point. Self-contained; needs no clone. |
 | `constitution.md` | The charter. Read every run. |
 | `state.template.json` | Template; the bootstrap writes your real `state.json` from it. |
 | `BOOTSTRAP-PROMPT.md` | Step 0: self-configure against your account. |

@@ -30,6 +30,12 @@ jobs:
           FORBIDDEN_REFS: ${{ secrets.FORBIDDEN_REFS }}
         run: bash scripts/check_forbidden_patterns.sh
 
+      # Recipes are distributed by URL, not by clone. A START.md is fetched and read STANDALONE
+      # by an agent with no local copy, so a relative link or a stale path silently breaks
+      # distribution for every user who starts from the URL.
+      - name: Check recipe entry points are self-contained
+        run: bash scripts/check_recipe_entrypoints.sh
+
       - name: Scan commit messages + PR text for private references
         if: github.event_name == 'pull_request'
         env:
