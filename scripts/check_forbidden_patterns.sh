@@ -82,12 +82,29 @@ fi
 
 # 4) Private-reference guard (only when the secret is configured).
 if [ -n "${FORBIDDEN_REFS:-}" ]; then
-  hits=$(echo "$files" | xargs -r grep -IlniE "$FORBIDDEN_REFS" 2>/dev/null | cut -d: -f1 | sort -u || true)
+  # This repo's OWN public URLs are not private references, and they have to appear: recipes are
+  # distributed by URL, so every START.md and README carries them. They trip this scan anyway,
+  # because the public GitHub org (ApparelHub-AI) is case-insensitively identical to a private
+  # repo name in the pattern list, and this scan is deliberately case-insensitive.
+  #
+  # So neutralize just the host + org + repo prefix before matching. The rest of the path is
+  # left intact and still scanned, so a private reference in a URL PATH is still caught.
+  self_prefix='https?://(raw\.githubusercontent\.com|github\.com)/ApparelHub-AI/apparelhub-recipes'
+  hits=""
+  for f in $files; do
+    if sed -E "s#${self_prefix}#PUBLIC_SELF_URL#g" "$f" 2>/dev/null | grep -qIiE "$FORBIDDEN_REFS"; then
+      hits="${hits}${f} "
+    fi
+  done
   if [ -n "$hits" ]; then
     report "Found a private-repo reference (internal repo name / ticket ref / internal path)." \
       "Refer to internal work generically, e.g. 'an internal platform ticket'. The pattern list is the FORBIDDEN_REFS repo secret; grep your working tree against your own copy to find it." \
       "$hits"
-    [ "$VERBOSE" -eq 1 ] && echo "$files" | xargs -r grep -HIniE "$FORBIDDEN_REFS"
+    if [ "$VERBOSE" -eq 1 ]; then
+      for f in $hits; do
+        sed -E "s#${self_prefix}#PUBLIC_SELF_URL#g" "$f" | grep -nIiE "$FORBIDDEN_REFS" | sed "s#^#${f}:#"
+      done
+    fi
   fi
 else
   echo "note: FORBIDDEN_REFS not set; skipped the private-reference scan (structural scans still ran)."

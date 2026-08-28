@@ -11,13 +11,32 @@ blocked target counted done for the run and retried later, and a run that never 
 Works in any agent runtime that can reach the ApparelHub connector: Claude Cowork, Claude Code,
 or a custom harness.
 
+## Start it with one line
+
+Paste this into a fresh chat with your agent:
+
+> Read https://raw.githubusercontent.com/ApparelHub-AI/apparelhub-recipes/main/recipes/reconciler-restocker/START.md and follow it.
+
+If your agent cannot fetch URLs, open
+[`START.md`](https://raw.githubusercontent.com/ApparelHub-AI/apparelhub-recipes/main/recipes/reconciler-restocker/START.md)
+and paste the whole thing instead. It carries everything the agent needs to start safely, and it
+needs no clone.
+
+After it configures your account anchors, fill `target-catalog.md` with the products you want kept
+present, then run
+[`KICKOFF-PROMPT.md`](https://raw.githubusercontent.com/ApparelHub-AI/apparelhub-recipes/main/recipes/reconciler-restocker/KICKOFF-PROMPT.md)
+to start reconciling.
+
 ## What you need
 - An ApparelHub account with at least one fulfillment provider connected (Printful / Printify /
   Gelato) and a sales channel (Shopify / WooCommerce / Wix) on the store you want to keep stocked.
 - Agent access to ApparelHub: the hosted MCP connector, the local MCP server, or an Agent API
   key. See [apparelhub.ai/agents](https://apparelhub.ai/agents).
 
-## Install
+## Running it from a clone (advanced)
+
+The one-line URL above is the supported path. If you would rather keep the files locally:
+
 1. Copy this `reconciler-restocker/` folder into your agent's working / mounted folder.
    (Copy it out of this repo so your filled-in state stays yours.)
 2. Grant your agent **only** the ApparelHub connector (add Gmail if you want run-summary emails).
@@ -52,6 +71,7 @@ its row from `target-catalog.md` (the agent never removes products on its own).
 ## Files
 | File | Role |
 |---|---|
+| `START.md` | The one-line URL entry point. Self-contained; needs no clone. |
 | `constitution.md` | The charter. Read every run. |
 | `state.template.json` | Template; the bootstrap writes your real `state.json` from it. |
 | `BOOTSTRAP-PROMPT.md` | Step 0: self-configure against your account. |

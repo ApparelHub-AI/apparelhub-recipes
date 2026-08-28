@@ -17,6 +17,17 @@ their workspaces, **establishes brand identity from scratch when there is none**
 and gets it **approved by email**. Run this to onboard and produce; run that one to operate what has
 already launched.
 
+## Start it with one line
+
+Paste this into a fresh chat with your agent:
+
+> Read https://raw.githubusercontent.com/ApparelHub-AI/apparelhub-recipes/main/recipes/agency-brand-intake/START.md and follow it.
+
+If your agent cannot fetch URLs, open
+[`START.md`](https://raw.githubusercontent.com/ApparelHub-AI/apparelhub-recipes/main/recipes/agency-brand-intake/START.md)
+and paste the whole thing instead. That path is degraded for this recipe, because its charter is
+long and does not fit in one pasteable file, so prefer a surface that can fetch URLs.
+
 ## What you need
 - An ApparelHub **agency / Enterprise** account with the agency feature (this recipe creates a
   workspace per client; without it `create_workspace` returns `feature_unavailable`, and the
@@ -34,7 +45,9 @@ already launched.
 - A folder per client brand that your agent can read and write, containing that brand's assets, or
   empty if the brand does not exist yet.
 
-## Install
+## Running it from a clone (advanced)
+The one-line URL above is the supported path. If you would rather keep the files locally:
+
 1. Copy this `agency-brand-intake/` folder into your agent's working / mounted folder.
    (Copy it out of this repo so your filled-in roster and state stay yours.)
 2. Grant your agent the ApparelHub connector **and** an email tool.
@@ -130,6 +143,7 @@ item.
 ## Files
 | File | Role |
 |---|---|
+| `START.md` | The one-line URL entry point. Fetches the rest of the recipe, then self-configures. |
 | `constitution.md` | The charter. Read every run. |
 | `state.template.json` | Template; the bootstrap writes your real `state.json` from it. |
 | `client-roster.template.csv` | Template; the bootstrap writes your real `client-roster.csv` from it. |

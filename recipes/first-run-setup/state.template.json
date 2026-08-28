@@ -1,0 +1,48 @@
+{
+  "_comment": "TEMPLATE, do not edit by hand. Run BOOTSTRAP-PROMPT.md with your agent + the ApparelHub connector; it reads your account's readiness and writes a real state.json next to this file. Then run KICKOFF-PROMPT.md.",
+  "_never_store": "No token, API key, password, or secret is ever written to this file, not even masked or truncated. Credentials go straight to the connect tool and are then forgotten.",
+  "_source_of_truth": "check_setup_readiness is authoritative. This file only records what the operator has already been told, so a fresh session can resume without re-asking. If the two disagree, believe readiness.",
+  "_bootstrap": "unconfigured",
+  "phase": "0_assess",
+  "workspace_uuid": null,
+  "store": {
+    "uuid": null,
+    "name": null,
+    "status": null
+  },
+  "fulfillment": {
+    "provider_name": null,
+    "provider_uuid": null,
+    "connect_mode": null,
+    "connected": false,
+    "upstream_account_confirmed": false
+  },
+  "sales_channel": {
+    "provider_name": null,
+    "provider_uuid": null,
+    "integration_uuid": null,
+    "connected": false,
+    "skipped": false,
+    "_skipped_note": "true means the operator chose fulfillment-only for now. That is a valid finished state, not an unfinished one."
+  },
+  "first_product": {
+    "product_uuid": null,
+    "name": null,
+    "created_at": null,
+    "channel_state": "draft"
+  },
+  "blocked": {
+    "reason": null,
+    "upgrade_url": null,
+    "_note": "Set when a plan limit stops a phase. A limit is an outcome to report plainly, not an error to retry."
+  },
+  "handoff": {
+    "recipe": null,
+    "completed_at": null
+  },
+  "gates": {
+    "autonomous_spend_usd": 0,
+    "publish_live": "never_in_this_recipe",
+    "confirm_paid_order": "never_in_this_recipe"
+  }
+}

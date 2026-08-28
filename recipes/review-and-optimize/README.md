@@ -9,13 +9,25 @@ never publishes anything live, and never confirms a paid order.
 Works in any agent runtime that can reach the ApparelHub connector: Claude Cowork, Claude Code,
 or a custom harness.
 
+## Start it with one line
+
+Paste this into a fresh chat with your agent:
+
+> Read https://raw.githubusercontent.com/ApparelHub-AI/apparelhub-recipes/main/recipes/review-and-optimize/START.md and follow it.
+
+If your agent cannot fetch URLs, open
+[`START.md`](https://raw.githubusercontent.com/ApparelHub-AI/apparelhub-recipes/main/recipes/review-and-optimize/START.md)
+and paste the whole thing instead. It carries the safety gates inline, and it needs no clone.
+
 ## What you need
 - An existing ApparelHub store with some sales history to read, a fulfillment provider connected
   (Printful / Printify / Gelato), and a sales channel (Shopify / WooCommerce / Wix).
 - Agent access to ApparelHub: the hosted MCP connector, the local MCP server, or an Agent API
   key. See [apparelhub.ai/agents](https://apparelhub.ai/agents).
 
-## Install
+## Running it from a clone (advanced)
+The one-line URL above is the supported path. If you would rather keep the files locally:
+
 1. Copy this `review-and-optimize/` folder into your agent's working / mounted folder.
    (Copy it out of this repo so your filled-in state stays yours.)
 2. Grant your agent **only** the ApparelHub connector (add Gmail if you want run-summary emails).
@@ -45,6 +57,7 @@ of every run. In short, each run: Orient, Serve existing orders, Assess the anal
 ## Files
 | File | Role |
 |---|---|
+| `START.md` | The one-line URL entry point. Self-contained; carries the gates inline, no clone needed. |
 | `constitution.md` | The charter. Read every run. |
 | `state.template.json` | Template; the bootstrap writes your real `state.json` from it. |
 | `BOOTSTRAP-PROMPT.md` | Step 0: self-configure against your account. |
